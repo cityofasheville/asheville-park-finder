@@ -8,7 +8,7 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
     //Initialize the map
     var map = L.map('map', {
         center: [35.5951125,-82.5511088], 
-        zoom : 13,
+        zoom : 12,
         maxZoom : 22,
     });
 
