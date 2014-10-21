@@ -1,0 +1,84 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="parkFinder"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Park Finder</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" href="css/bootswatch-journal.min.css">
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/leaflet.awesome-markers.css">
+    <style type="text/css">
+        
+    </style>
+
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div ng-controller = "ParkFinderCtrl">
+    	<div id="map" style = "width : 100%; height : 100%; position : absolute">
+            <div class="well" style="z-index: 1000;position: absolute;top: 0px; right : 2%">
+                <div class="col-xs-12">
+                    <div class="pull-left" style = "text-align : center; margin-top: 10px">
+                        <h5 class = "text-primary hidden-xs">City of</h5>
+                        <h5 class = "text-primary hidden-xs"> Asheville</h5>
+                    </div>
+              
+                    <h2 class = "text-primary hidden-xs pull-left" style = "margin-left : 5px">Park Finder</h2>
+                    <h5 class = "text-primary visible-xs" style = "margin : 0px">City of Asheville</h5>
+                    <h3 class = "text-primary visible-xs" style = "margin : 0px">Park Finder</h3>
+                </div>
+                <hr>
+                <form class="col-xs-12">
+                    <h5 class = "text-info">I want to find a park with...</h5>
+                    <select class = 'form-control' ng-init = "parkOptionValue = parkOptions[0]" ng-model = "parkOptionValue" ng-options="item.label for item in parkOptions" ng-change = "onChangeFilterParks(parkOptionValue)"></select>
+                </form>
+                
+            </div>
+        </div>
+        <div class="modal fade" id = "parkDetailsModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">{{parkName}}</h4>
+              </div>
+              <div class="modal-body">
+                <p>{{parkAddress}}</p>
+                <a target = '_blank' href="{{googleAddress}}">Get directions with Google Maps</a>
+                <hr>
+                <div class= "row">
+                    <p class = 'col-md-6' ng-repeat = "amenity1 in parkAmenitiesColumn1"><img src="images/{{amenity1.icon}}"> {{amenity1.label}}</p>
+                    <p class = 'col-md-6' ng-repeat = "amenity2 in parkAmenitiesColumn2"><img src="images/{{amenity2.icon}}"> {{amenity2.label}}</p>
+                </div>
+                
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+
+
+    <!--[if lt IE 9]>
+    <script src="dependencies/ie-specific/ie-specific.min.js"></script>
+    <![endif]-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet.awesome-markers.min.js"></script>
+    <script src="js/park-options.js"></script>
+    <script src="js/app.js"></script>
+    
+</body>
+</html>
