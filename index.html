@@ -30,7 +30,7 @@
     	<div id="map" style = "width : 100%; height : 100%; position : absolute">
             <div class="well" style="z-index: 1000;position: absolute;top: 0px; right : 2%">
                 <div class="col-xs-12">
-                    <button class="btn btn-primary visible-xs" ng-init = "collapsed = false" ng-click = "collapsed = !collasped"><i class="fa fa-compress" ng-show = "collasped"></i><i class="fa fa-expand" ng-show = "!collasped"></i></button>
+                    <button class="btn btn-primary visible-xs" ng-init = "collapsed = false" ng-click = "collapsed = !collasped"><i class="fa fa-compress" ng-show = "collapsed"></i><i class="fa fa-expand" ng-show = "!collapsed"></i></button>
                     <div class="pull-left" style = "text-align : center; margin-top: 10px">
                         <h5 class = "text-primary hidden-xs">City of</h5>
                         <h5 class = "text-primary hidden-xs"> Asheville</h5>
@@ -41,7 +41,7 @@
                     <h3 class = "text-primary visible-xs" style = "margin : 0px">Park Finder</h3>
                 </div>
                 <hr>
-                <form class="col-xs-12">
+                <form class="col-xs-12" ng-show = "collapsed">
                     <h5 class = "text-info">I want to find a park with...</h5>
                     <select class = 'form-control' ng-init = "parkOptionValue = parkOptions[0]" ng-model = "parkOptionValue" ng-options="item.label for item in parkOptions" ng-change = "onChangeFilterParks(parkOptionValue)"></select>
                 </form>
