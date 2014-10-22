@@ -107,7 +107,7 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
         }else{
             filteredParksDataGeoJson.features = parksDataGeoJson.features;
         }
-        
+        $('#findAParkModal').modal('hide')
         map.removeLayer(parksMarkers);
         parksMarkers = createGeoJsonMarkers(filteredParksDataGeoJson);
         parksMarkers.addTo(map);
@@ -131,6 +131,9 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
         $scope.parkAmenitiesColumn1 = parkAmenities.splice(0, Math.floor(parkAmenities.length/2));
         $scope.parkAmenitiesColumn2 = parkAmenities.splice(Math.floor(parkAmenities.length/2), parkAmenities.length);
         $('#parkDetailsModal').modal();
+    }
+    $scope.onClickOpenFindAParkModal = function(){
+        $('#findAParkModal').modal();
     }
 
     //Starts everything 
