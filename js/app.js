@@ -39,6 +39,8 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
     //
     $scope.parkOptions = parkOptions;
 
+    $scope.typeOfParksShowing = '';
+
 
     //Makes HTTP request to get data from a url
     var getData = function(url){
@@ -104,7 +106,10 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
                     filteredParksDataGeoJson.features.push(parksDataGeoJson.features[i]);
                 }
             }; 
+            $scope.typeOfParksShowing = "Showing parks with " + parkOption.label + ".";
         }else{
+            $scope.typeOfParksShowing = "";
+            
             filteredParksDataGeoJson.features = parksDataGeoJson.features;
         }
         $('#findAParkModal').modal('hide')
