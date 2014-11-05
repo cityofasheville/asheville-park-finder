@@ -13,7 +13,7 @@ var parkOptions = [
     	{value : 'Picnic_She', label : 'Picnic Shelters', icon : 'picnicShelter.png'},
     	{value : 'Picnic_Tab', label : 'Picnic Tables', icon : 'picnicTable.png'},
     	{value : 'Playrgound', label : 'Playgrounds', icon : 'playground.png'},
-	{value : 'Pool', label : 'Pool', icon : 'pool.png'},
+	{value : 'Pool', label : 'Pools', icon : 'pool.png'},
     	{value : 'Restrooms', label : 'Restrooms', icon : 'toilets.png'},
     	{value : 'Recreation', label : 'Recreation Center', icon : 'communitycentre.png'},
 	{value : 'Splasheville', label : 'Splasheville', icon : 'splasheville.png'},
