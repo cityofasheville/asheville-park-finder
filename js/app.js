@@ -21,8 +21,7 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
     
      L.tileLayer("http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png",{
         attribution:'&copy; <p>Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png"></p>',
-        maxZoom : 22,
-        tms : true
+        maxZoom : 22
     }).addTo(map);
 
     //Object to hold the parks geojson
