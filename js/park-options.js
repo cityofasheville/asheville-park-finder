@@ -2,7 +2,7 @@ var parkOptions = [
 	{value : 'all', label : 'Choose an option', icon : 'none'},
     	{value : 'Baseball_F', label : 'Baseball/Softball Fields', icon : 'baseball.png'},
     	{value : 'Basketball', label : 'Basketball Courts', icon : 'basketballfield.png'},
-	{value : 'Climbing_Wall', label : 'Climbing Wall', icon : 'climbing_wall.png'},
+	{value : 'Climbing Wall', label : 'Climbing Wall', icon : 'climbing_wall.png'},
     	{value : 'Cycling', label : 'Cycling Paths', icon : 'cycling.png'},
 	{value : 'Disc_Golf', label : 'Disc Golf', icon : 'discgolf.png'},
     	{value : 'Dog_Park', label : 'Dog Parks', icon : 'dogs_leash.png'},
