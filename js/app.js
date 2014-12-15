@@ -86,7 +86,7 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
     var createGeoJsonMarkers = function(data){
         return L.geoJson(data, {
             pointToLayer: function (feature, latlng) {
-                return L.marker(latlng, {icon: parkMarker}).addTo(map);    
+                return L.marker(latlng, {icon: parkMarker}).bindLabel(feature.properties.parkname).addTo(map);    
             },
             onEachFeature: function (feature, layer) {
                 layer.on('click', function(){
@@ -99,6 +99,15 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
         });
     }; 
 
+    var buildParkNameArray = function(geoJson){
+        var tempArray = [{value : 'all', label : 'Choose an option'}];
+        for (var i = 0; i < geoJson.features.length; i++) {
+            var tempObj = {'value' :  geoJson.features[i].properties.parkname, 'label' :  geoJson.features[i].properties.parkname};
+            tempArray.push(tempObj);  
+        };
+        return tempArray;
+    }
+
     
     $scope.onChangeFilterParks = function(parkOption){
         var filteredParksDataGeoJson = {
@@ -106,27 +115,57 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
             'features' : []
         };
         if(parkOption.value !== 'all'){
-           for (var i = 0; i < parksDataGeoJson.features.length; i++) {
-                if(parksDataGeoJson.features[i].properties[parkOption.value] === 'Yes'){
-                    filteredParksDataGeoJson.features.push(parksDataGeoJson.features[i]);
+           for (var i = 0; i < $scope.parksDataGeoJson.features.length; i++) {
+                if($scope.parksDataGeoJson.features[i].properties[parkOption.value] === 'Yes'){
+                    filteredParksDataGeoJson.features.push($scope.parksDataGeoJson.features[i]);
                 }
             }; 
             $scope.typeOfParksShowing = "Showing parks with " + parkOption.label + ".";
         }else{
             $scope.typeOfParksShowing = "";
             
-            filteredParksDataGeoJson.features = parksDataGeoJson.features;
+            filteredParksDataGeoJson.features = $scope.parksDataGeoJson.features;
         }
         $('#findAParkModal').modal('hide')
         map.removeLayer(parksMarkers);
         parksMarkers = createGeoJsonMarkers(filteredParksDataGeoJson);
+        map.fitBounds(parksMarkers);
+        if(filteredParksDataGeoJson.features.length === 1){
+            map.setZoom(16);
+        }
+        parksMarkers.addTo(map);
+    };
+
+    $scope.onChangeFilterParksByName = function(parkName){
+        var filteredParksDataGeoJson = {
+            'type' : "FeatureCollection",
+            'features' : []
+        };
+        if(parkName.value !== 'all'){
+           for (var i = 0; i < $scope.parksDataGeoJson.features.length; i++) {
+                if($scope.parksDataGeoJson.features[i].properties.parkname === parkName.value){
+                    filteredParksDataGeoJson.features.push($scope.parksDataGeoJson.features[i]);
+                }
+            }; 
+            $scope.typeOfParksShowing = "Showing " + parkName.label + ".";
+        }else{
+            $scope.typeOfParksShowing = "";
+            
+            filteredParksDataGeoJson.features = $scope.parksDataGeoJson.features;
+        }
+        $('#findAParkModal').modal('hide')
+        map.removeLayer(parksMarkers);
+        parksMarkers = createGeoJsonMarkers(filteredParksDataGeoJson);
+        map.fitBounds(parksMarkers);
+        map.setZoom(16);
         parksMarkers.addTo(map);
     };
 
     $scope.getParkDetails = function(parkProperties){
         console.log(parkProperties);
         $scope.parkName = parkProperties.parkname;
-        $scope.parkAddress = parkProperties.Address
+        $scope.parkAddress = parkProperties.Address;
+        $scope.telephone = "Telephone Number";
         $scope.googleAddress = "http://maps.google.com/maps?daddr="+parkProperties.Address+"+Asheville,+NC";
         var parkAmenities = [];
         for (var prop in parkProperties) {
@@ -151,8 +190,10 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
         .then(function(data){
             console.log(data);
             var parksData = data;
-            parksDataGeoJson = createGeoJsonFromArcGisFeatureService(data);
-            parksMarkers = createGeoJsonMarkers(parksDataGeoJson);
+            $scope.parksDataGeoJson = createGeoJsonFromArcGisFeatureService(data);
+            $scope.parkNames = buildParkNameArray($scope.parksDataGeoJson);
+            console.log($scope.parkNames);
+            parksMarkers = createGeoJsonMarkers($scope.parksDataGeoJson);
             parksMarkers.addTo(map);
             
         });
