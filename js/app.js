@@ -20,7 +20,7 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
     // }).addTo(map);
     
      L.tileLayer("https://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png",{
-        attribution:'&copy;Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">',
+        attribution:'&copy;Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="https://developer.mapquest.com/content/osm/mq_logo.png">',
         maxZoom : 22
     }).addTo(map);
 
@@ -162,7 +162,6 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
     };
 
     $scope.getParkDetails = function(parkProperties){
-        console.log(parkProperties);
         $scope.parkName = parkProperties.parkname;
         $scope.parkAddress = parkProperties.Address;
         $scope.telephone = "Telephone Number";
@@ -188,11 +187,9 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
     //Starts everything 
     getData(url)
         .then(function(data){
-            console.log(data);
             var parksData = data;
             $scope.parksDataGeoJson = createGeoJsonFromArcGisFeatureService(data);
             $scope.parkNames = buildParkNameArray($scope.parksDataGeoJson);
-            console.log($scope.parkNames);
             parksMarkers = createGeoJsonMarkers($scope.parksDataGeoJson);
             parksMarkers.addTo(map);
             
