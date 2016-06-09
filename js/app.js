@@ -19,7 +19,7 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
     //     tms : true
     // }).addTo(map);
     
-     L.tileLayer("http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png",{
+     L.tileLayer("https://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png",{
         attribution:'&copy;Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">',
         maxZoom : 22
     }).addTo(map);
@@ -39,7 +39,7 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
       });
 
     //URL to the ArcGIS feature service for the parks data
-    var url = "http://services.arcgis.com/aJ16ENn1AaqdFlqx/arcgis/rest/services/ParkAssetPoints1/FeatureServer/0/query?where=parkname=parkname&outFields=*&f=json";
+    var url = "https://services.arcgis.com/aJ16ENn1AaqdFlqx/arcgis/rest/services/ParkAssetPoints1/FeatureServer/0/query?where=parkname=parkname&outFields=*&f=json";
 
     //
     $scope.parkOptions = parkOptions;
@@ -166,7 +166,7 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
         $scope.parkName = parkProperties.parkname;
         $scope.parkAddress = parkProperties.Address;
         $scope.telephone = "Telephone Number";
-        $scope.googleAddress = "http://maps.google.com/maps?daddr="+parkProperties.Address+"+Asheville,+NC";
+        $scope.googleAddress = "https://maps.google.com/maps?daddr="+parkProperties.Address+"+Asheville,+NC";
         var parkAmenities = [];
         for (var prop in parkProperties) {
             if(parkProperties[prop] === 'Yes'){
