@@ -19,10 +19,12 @@ parkFinder.controller('ParkFinderCtrl', ['$scope', '$http', '$q', function ($sco
     //     tms : true
     // }).addTo(map);
     
-     L.tileLayer("https://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png",{
-        attribution:'&copy;Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="https://developer.mapquest.com/content/osm/mq_logo.png">',
-        maxZoom : 22
-    }).addTo(map);
+//      L.tileLayer("https://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png",{
+//         attribution:'&copy;Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="https://developer.mapquest.com/content/osm/mq_logo.png">',
+//         maxZoom : 22
+//     }).addTo(map);
+    
+    var esriStreets = L.esri.basemapLayer('Streets').addTo(map);
 
     //Object to hold the parks geojson
     var parksDataGeoJson = {};
